@@ -1,0 +1,115 @@
+﻿@page "/clubs"
+
+@using System.Text.RegularExpressions
+
+@inject HttpClient Http
+
+<PageTitle>Clubs at Lowell</PageTitle>
+
+<Card>
+	<Header>
+		<h1 class="primary">
+			Clubs at Lowell
+		</h1>
+
+	</Header>
+	<Content>
+		<nav id="day-btn-group">
+			@foreach(Day day in Enum.GetValues<Day>()) {
+				Day local = day;
+				<button class="day-button primary @IsSelected(local)" onclick=@(() => {SelectedDay = local; StateHasChanged();})>@day</button>
+			}
+		</nav>
+		<ul id="club-list" class="cursor-pointer">
+			@foreach(var club in ClubDict[SelectedDay]) {
+				Club local = club;
+				<li class="item" onclick=@(() => { currentClub = local; StateHasChanged(); })>
+					<p class="primary">@club.Name</p>
+					<p class="secondary">@club.MeetingDays</p>
+					<p class="secondary">@club.President</p>
+				</li>
+			}
+		</ul>
+	</Content>
+</Card>
+@if (currentClub is not null) {
+	//Render popup
+	//Also darken
+	<div class="darken" onclick=@(() => {currentClub = null; StateHasChanged();})></div>
+	<div id="popup-container">
+		<Card>
+			<Content>
+				<div id="popup">
+					<h2 class="primary">@currentClub.Name</h2>
+					<section id="club-info" class="primary">
+						<div>
+							<b class="secondary">Day(s):</b> <p>@currentClub.MeetingDays</p>
+							<b class="secondary">President(s):</b> <p>@currentClub.President</p>
+							<b class="secondary">VP(s):</b> <p>@currentClub.VicePresident</p>
+						</div>
+						<div style="text-align: right;">
+							<b class="secondary">Club email:</b> <p>@currentClub.ClubEmail</p>
+							<b class="secondary">Sponsor:</b> <p>@currentClub.ClubSponsor</p>
+							<b class="secondary">Sponsor email:</b> <p>@currentClub.SponsorEmail</p>
+						</div>
+					</section>
+					<hr>
+					<p class="primary">@currentClub.Description</p>
+				</div>
+			</Content>
+		</Card>
+	</div>
+}
+
+@code {
+	class Club {
+		public string? Name { get; set; }
+		public string? President { get; set; }
+		public string? ClubEmail { get; set; }
+		public string? VicePresident { get; set; }
+		public string? AltContactEmail { get; set; }
+		public string? ClubSponsor { get; set; }
+		public string? SponsorEmail { get; set; }
+		public string? MeetingDays { get; set; }
+		public string? Description { get; set; }
+	}
+	enum Day {
+		Monday, Tuesday, Wednesday, Thursday, Friday, All
+	}
+	Day SelectedDay { get; set; } = Day.All;
+	Dictionary<Day, List<Club>> ClubDict;
+	protected async override Task OnInitializedAsync() {
+		ClubDict = new Dictionary<Day, List<Club>>();
+		foreach(Day day in Enum.GetValues<Day>()) {
+			ClubDict[day] = new List<Club>();
+		}
+		using var stream = await Http.GetStreamAsync("data/clubs.tsv");
+		using var reader = new StreamReader(stream);
+		string line;
+		while((line = reader.ReadLine()) != null) {
+			var data = line.Split("\t");
+			Club club = new Club {
+				Name = data[0],
+				President = data[1],
+				ClubEmail = data[2],
+				VicePresident = data[3],
+				AltContactEmail = data[4],
+				ClubSponsor = data[5],
+				SponsorEmail = data[6],
+				MeetingDays = data[7],
+				Description = data[8]
+			};
+			Day[] days = Regex.Matches(club.MeetingDays, "Monday|Tuesday|Wednesday|Thursday|Friday")
+						.Select(match => Enum.Parse<Day>(match.Value)).ToArray();
+			foreach(var day in days) {
+				ClubDict[day].Add(club);
+			}
+			ClubDict[Day.All].Add(club);
+		}
+	}
+	Club? currentClub;
+	string IsSelected(Day day) {
+		if (SelectedDay == day) return "selected";
+		else return "";
+	}
+}

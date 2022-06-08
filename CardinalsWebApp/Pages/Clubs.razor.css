@@ -1,0 +1,79 @@
+﻿.primary {
+    color: rgb(255 255 255 / 1)
+}
+
+.secondary {
+    color: rgb(255 255 255 / 0.5)
+}
+
+p {
+    margin: 0;
+}
+
+.item {
+    padding-bottom: 1.25rem;
+    padding-top: 1.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+#clubs-card {
+    margin: auto;
+    width: 100%;
+}
+
+#club-list {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+    list-style: none;
+    font-size: .875rem;
+    line-height: 1.25rem;
+}
+
+#popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.darken {
+    background-color: rgba(0,0,0,.4);
+    bottom: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    position:fixed;
+}
+
+#popup {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+#club-info {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+}
+
+hr {
+    border: 1px solid hsla(0,0%,100%,80%);
+}
+
+#day-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+.day-button {
+    flex-grow: 1;
+    padding: 0.5rem 0.25rem;
+    background-color: rgb(44 44 44 / 1);
+
+    border: none;
+}
+.day-button.selected {
+    background-color: rgb(55 55 55/1);
+}

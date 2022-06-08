@@ -1,0 +1,18 @@
+﻿@using System.Diagnostics.CodeAnalysis
+
+<div class="container">
+	@if (Header is not null) {
+		<header class="card-head">
+			@Header
+		</header>
+	}
+	<div class="card">
+		@Content
+	</div>
+</div>
+@code {
+	[Parameter,AllowNull]
+	public RenderFragment? Header { get; set; }
+	[Parameter]
+	public RenderFragment? Content { get; set; }
+}
