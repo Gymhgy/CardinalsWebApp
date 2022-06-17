@@ -100,12 +100,6 @@ hr[b-bervfq359t] {
     align-items: center; /* align vertical */
 }
 
-
-.period[b-hwuxqdxctl] {
-    display: flex;
-    justify-content: space-between;
-}
-
 /* add seperator */
 .schedule-item[b-hwuxqdxctl] {
     border-bottom: 1px solid hsla(0,0%,100%,80%);
@@ -114,6 +108,11 @@ hr[b-bervfq359t] {
     .schedule-item:last-child[b-hwuxqdxctl] {
         border: none;
     }
+
+.period[b-hwuxqdxctl] {
+    display: flex;
+    justify-content: space-between;
+}
 
 .lunch[b-hwuxqdxctl] {
     display: flex;
@@ -126,6 +125,10 @@ hr[b-bervfq359t] {
     gap: 1rem;
     flex-direction: column;
     flex-grow: 1;
+}
+
+.lunch-slot .period[b-hwuxqdxctl] {
+    flex-direction: column;
 }
 
 hr#lunch-divider[b-hwuxqdxctl] {
