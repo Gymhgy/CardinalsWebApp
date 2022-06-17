@@ -1,15 +1,5 @@
 /* /Pages/Clubs.razor.rz.scp.css */
-.primary[b-bervfq359t] {
-    color: rgb(255 255 255 / 1)
-}
 
-.secondary[b-bervfq359t] {
-    color: rgb(255 255 255 / 0.5)
-}
-
-p[b-bervfq359t] {
-    margin: 0;
-}
 
 .item[b-bervfq359t] {
     padding-bottom: 1.25rem;
@@ -81,14 +71,69 @@ hr[b-bervfq359t] {
 /* /Pages/Index.razor.rz.scp.css */
 #container[b-hwuxqdxctl] {
 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+#date-selector[b-hwuxqdxctl] {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.clear[b-hwuxqdxctl] {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+#date-shower[b-hwuxqdxctl] {
+    width: 14rem;
+    height: 2.25rem;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
 
 
+.period[b-hwuxqdxctl] {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* add seperator */
+.schedule-item[b-hwuxqdxctl] {
+    border-bottom: 1px solid hsla(0,0%,100%,80%);
+    margin: 1.5rem 1.5rem 1rem 1.5rem;
+}
+    .schedule-item:last-child[b-hwuxqdxctl] {
+        border: none;
+    }
+
+.lunch[b-hwuxqdxctl] {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.lunch-slot[b-hwuxqdxctl] {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+hr#lunch-divider[b-hwuxqdxctl] {
+    border: 1px solid hsla(0,0%,100%,80%);
 }
 /* /Shared/Card.razor.rz.scp.css */
-.card[b-z1l97ba4nh] {
-    background-color: rgb(55 55 55/1);
+.card-back[b-z1l97ba4nh] {
     border-radius: 0.5rem;
-    min-height: 50%;
 }
 
 .card-head[b-z1l97ba4nh] {
@@ -96,13 +141,11 @@ hr[b-bervfq359t] {
     background-color: var(--cardinal);
     border: 0 solid var(--cardinal);
     border-radius: 0.5rem;
-
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
     padding-top: 0.75rem;
     padding-left: 1rem;
     padding-right: 1rem;
-
     display: flex;
     align-items: center;
 }
@@ -116,7 +159,9 @@ hr[b-bervfq359t] {
 
 main[b-3hh4ywwqho] {
     flex: 1;
-    background-color: rgb(35 35 35/1);
+    background: rgb(35,35,35);
+    background: linear-gradient(0deg, rgba(35,35,35,1) 20%, rgba(196,30,58,1) 90%);
+    background-attachment: fixed;
 }
 
 .sidebar[b-3hh4ywwqho] {
