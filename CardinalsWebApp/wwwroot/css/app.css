@@ -1,6 +1,7 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
+    height: 100%;
     font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
 }
 
@@ -64,4 +65,26 @@ a, .btn-link {
 
 button {
     text-align: center;
+}
+
+.primary {
+    color: rgb(255 255 255 / 1)
+}
+
+.secondary {
+    color: rgb(255 255 255 / 0.5)
+}
+
+p {
+    margin: 0;
+}
+
+/* 100% Fit to height */
+#app {
+    display: flex;
+    min-height: 100%;
+}
+
+.page {
+    flex-grow: 1;
 }
