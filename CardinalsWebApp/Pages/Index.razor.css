@@ -1,5 +1,5 @@
 ﻿#container {
-
+    position: relative;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -59,4 +59,14 @@
 
 hr#lunch-divider {
     border: 1px solid hsla(0,0%,100%,80%);
+}
+
+#jump {
+    position: absolute;
+    right: 0rem;
+    padding: 0.5rem 0.25rem;
+    background-color: rgb(44 44 44 / 1);
+    border: none;
+
+    font-size: 14px;
 }

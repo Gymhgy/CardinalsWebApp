@@ -68,7 +68,12 @@
             </Content>
         </Card>
     }
+    @if (ScheduleProvider.Is2022Summer(selected)) {
+        <button id="jump" class="primary" onclick=@(() => {selected = ScheduleProvider.summer2022End;})>Jump to school year</button>
+    }
+
 </div>
+
 
 @code{
 

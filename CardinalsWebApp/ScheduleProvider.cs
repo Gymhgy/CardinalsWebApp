@@ -172,6 +172,13 @@
                 
             return false;
         }
+
+        static readonly DateOnly summer2022Start = new(2022, 6, 1);
+        public static readonly DateOnly summer2022End = new(2022, 8, 17);
+
+        public static bool Is2022Summer(DateOnly date) {
+            return date > summer2022Start && date < summer2022End;
+        }
     }
 
     public record Lunch(LunchSlot A, LunchSlot B) : PeriodBase("");
