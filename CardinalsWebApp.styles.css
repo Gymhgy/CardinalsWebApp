@@ -70,7 +70,7 @@ hr[b-bervfq359t] {
 }
 /* /Pages/Index.razor.rz.scp.css */
 #container[b-hwuxqdxctl] {
-
+    position: relative;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -130,6 +130,16 @@ hr[b-bervfq359t] {
 
 hr#lunch-divider[b-hwuxqdxctl] {
     border: 1px solid hsla(0,0%,100%,80%);
+}
+
+#jump[b-hwuxqdxctl] {
+    position: absolute;
+    right: 0rem;
+    padding: 0.5rem 0.25rem;
+    background-color: rgb(44 44 44 / 1);
+    border: none;
+
+    font-size: 14px;
 }
 /* /Shared/Card.razor.rz.scp.css */
 .card-back[b-z1l97ba4nh] {
