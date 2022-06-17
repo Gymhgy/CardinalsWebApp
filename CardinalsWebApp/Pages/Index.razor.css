@@ -29,12 +29,6 @@
     align-items: center; /* align vertical */
 }
 
-
-.period {
-    display: flex;
-    justify-content: space-between;
-}
-
 /* add seperator */
 .schedule-item {
     border-bottom: 1px solid hsla(0,0%,100%,80%);
@@ -43,6 +37,11 @@
     .schedule-item:last-child {
         border: none;
     }
+
+.period {
+    display: flex;
+    justify-content: space-between;
+}
 
 .lunch {
     display: flex;
@@ -55,6 +54,10 @@
     gap: 1rem;
     flex-direction: column;
     flex-grow: 1;
+}
+
+.lunch-slot .period {
+    flex-direction: column;
 }
 
 hr#lunch-divider {
