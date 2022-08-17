@@ -1,0 +1,22 @@
+﻿@page "/classes"
+
+@inject IAccountService accService
+
+@if(accService.Gradebook == null) {
+    <Login Refresh="() => StateHasChanged()"/>
+}
+else {
+    <button class="float-end" @onclick="() => {accService.Logout(); StateHasChanged();}">Logout</button>
+    @foreach(var course in accService.Gradebook.Descendants("Course")) {
+        <div class="border-none rounded-md shadow-lg mb-4 p-5 relative">
+            <h2 class="primary">@course.Attribute("Period").Value &mdash; @course.Attribute("Title").Value</h2>
+            @{var mark = course.Descendants("Mark").Last();}
+
+            <p class="secondary">@mark.Attribute("CalculatedScoreString").Value&mdash;@mark.Attribute("CalculatedScoreRaw").Value</p>
+        </div>
+    }
+}
+
+@code {
+
+}

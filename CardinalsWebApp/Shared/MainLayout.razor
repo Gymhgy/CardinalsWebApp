@@ -1,5 +1,8 @@
 ﻿@inherits LayoutComponentBase
 
+@inject IAccountService accService
+@inject IJSRuntime js
+
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -14,3 +17,17 @@
         </article>
     </main>
 </div>
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (accService.Gradebook == null) {
+            string username = await js.InvokeAsync<string>("window.ReadCookie", "username");
+            string password = await js.InvokeAsync<string>("window.ReadCookie", "password");
+            Console.WriteLine(username + " " + password);
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) return;
+
+            await accService.LoginAsync(new User { Username = username, Password = password }, false);
+        }
+    }
+}

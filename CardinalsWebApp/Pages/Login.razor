@@ -1,0 +1,41 @@
+@using System.ComponentModel.DataAnnotations;
+
+@inject IAccountService accService
+@inject IJSRuntime js
+
+<div class="border-none rounded-md shadow-lg mb-4 p-5 relative primary">
+        <EditForm Model="user" OnSubmit=@FormSubmitted>
+            <DataAnnotationsValidator/>
+            <label for="Username" class="d-block">Username</label>
+            <InputText type="text" class="d-block" placeholder="Enter Username" @bind-Value=user.Username id="Username"/>
+            <label class="d-block" for="Password">Password</label>
+            <InputText class="d-block" type="password" placeholder="Enter Password" @bind-Value=user.Password id="Password"/>
+            <label for="Remember">Remember Me</label>
+            <InputCheckbox @bind-Value="save" id="Remember"></InputCheckbox>
+            <button class="d-block" type="submit">Login</button>            
+
+        </EditForm>
+
+</div>
+<p class="primary">
+@s
+</p>
+@code {
+    string s = "";
+    private User user = new();
+    private bool save = false;
+
+    [Parameter]
+    public Action Refresh { get; set; }
+
+
+
+    async Task FormSubmitted(EditContext editContext) {
+        s = "Loading...";
+        await accService.LoginAsync(user, save);
+
+        Refresh();
+
+    }
+
+}
