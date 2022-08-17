@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "CardinalsWebApp.dll": "sha256-dDfb9B8DMOqGyeYockKPyHgmU\/RFq43QnYfHi7\/hMkY=",
+      "CardinalsWebApp.dll": "sha256-mEWtDiX9CKFsCo5rpJLQksTjPw3\/7CJBz8BJhaLNjHQ=",
       "Microsoft.AspNetCore.Components.dll": "sha256-GObJLtTHpW0RILPmi4JWGiMey6haTrUXc3DTLI7Pr74=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-lvK8BjUqR4beKl9SjUAY5QQ4YJmQHr06AdtE+ngBd+E=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-8hkbmtH2jLzX6TZnzSyNcKY4IqC4bt0kFsgXm7oxqRQ=",
