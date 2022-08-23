@@ -48,20 +48,19 @@
         });
 
         static readonly Schedule tuesdayFriday = new Schedule(new PeriodBase[] {
-            new Period("1", new TimeOnly(8, 40), new TimeOnly(9, 25)),
-            new Period("2", new TimeOnly(9, 30), new TimeOnly(10, 15)),
-            new Period("Registry", new TimeOnly(10, 20), new TimeOnly(10, 50)),
-            new Period("3", new TimeOnly(10, 55), new TimeOnly(11, 40)),
+            new Period("1", new TimeOnly(8, 40), new TimeOnly(9, 30)),
+            new Period("2", new TimeOnly(9, 35), new TimeOnly(10, 25)),
+            new Period("3", new TimeOnly(10, 30), new TimeOnly(11, 20)),
             new Lunch(
                 new LunchSlot("A Lunch / 4",
-                    new Period("A Lunch", new TimeOnly(11, 40), new TimeOnly(12, 20)),
-                    new Period("4", new TimeOnly(12, 25), new TimeOnly(13, 10))),
+                    new Period("A Lunch", new TimeOnly(11, 20), new TimeOnly(12, 00)),
+                    new Period("4", new TimeOnly(12, 05), new TimeOnly(12, 55))),
                 new LunchSlot("4 / B Lunch",
-                    new Period("4", new TimeOnly(11, 45), new TimeOnly(12, 30)),
-                    new Period("B Lunch", new TimeOnly(12, 30), new TimeOnly(13, 10)))),
-            new Period("5", new TimeOnly(13, 15), new TimeOnly(14, 00)),
-            new Period("6", new TimeOnly(14, 05), new TimeOnly(14, 50)),
-            new Period("7", new TimeOnly(14, 55), new TimeOnly(15, 40))
+                    new Period("4", new TimeOnly(11, 25), new TimeOnly(12, 15)),
+                    new Period("B Lunch", new TimeOnly(12, 15), new TimeOnly(12, 55)))),
+            new Period("5", new TimeOnly(13, 00), new TimeOnly(13, 50)),
+            new Period("6", new TimeOnly(13, 55), new TimeOnly(14, 45)),
+            new Period("7", new TimeOnly(14, 50), new TimeOnly(15, 40))
         });
         static readonly Dictionary<DayOfWeek, Schedule> regular = new Dictionary<DayOfWeek, Schedule> {
             [DayOfWeek.Monday] = new Schedule(new PeriodBase[] {

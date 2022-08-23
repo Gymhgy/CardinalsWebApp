@@ -12,7 +12,7 @@
             <InputText class="d-block" type="password" placeholder="Enter Password" @bind-Value=user.Password id="Password"/>
             <label for="Remember">Remember Me</label>
             <InputCheckbox @bind-Value="save" id="Remember"></InputCheckbox>
-            <button class="d-block" type="submit">Login</button>            
+            <button class="d-block btn btn-light" type="submit">Login</button>            
 
         </EditForm>
 
@@ -32,8 +32,12 @@
 
     async Task FormSubmitted(EditContext editContext) {
         s = "Loading...";
-        await accService.LoginAsync(user, save);
-
+        try {
+            await accService.LoginAsync(user, save);
+        }
+        catch {
+            s = "Error logging in. Your username or password may be incorrect, or Synergy is havng problems.";
+        }
         Refresh();
 
     }

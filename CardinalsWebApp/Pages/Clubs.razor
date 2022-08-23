@@ -6,31 +6,30 @@
 
 <PageTitle>Clubs at Lowell</PageTitle>
 
-<Card>
-	<Header>
-		<h1 class="text-white">
-			Clubs at Lowell
-		</h1>
+<header class="card-back">
+	<h1 class="text-white">
+		Clubs at Lowell
+	</h1>
 
-	</Header>
-	<Content>
-		<nav id="day-btn-group">
-			@foreach(Day day in Enum.GetValues<Day>()) {
-				Day local = day;
-				<button class="day-button primary @IsSelected(local)" onclick=@(() => {SelectedDay = local; StateHasChanged();})>@day</button>
-			}
-		</nav>
-		<ul id="club-list" class="cursor-pointer">
-			@foreach(var club in ClubDict[SelectedDay]) {
-				Club local = club;
-				<li class="item" onclick=@(() => { currentClub = local; StateHasChanged(); })>
-					<p class="primary">@club.Name</p>
-					<p class="secondary">@club.MeetingDays</p>
-					<p class="secondary">@club.President</p>
-				</li>
-			}
-		</ul>
-	</Content>
+</header>
+
+<Card>
+	<nav id="day-btn-group">
+		@foreach(Day day in Enum.GetValues<Day>()) {
+			Day local = day;
+			<button class="day-button primary @IsSelected(local)" onclick=@(() => {SelectedDay = local; StateHasChanged();})>@day</button>
+		}
+	</nav>
+	<ul id="club-list" class="cursor-pointer">
+		@foreach(var club in ClubDict[SelectedDay]) {
+			Club local = club;
+			<li class="item" onclick=@(() => { currentClub = local; StateHasChanged(); })>
+				<p class="primary">@club.Name</p>
+				<p class="secondary">@club.MeetingDays</p>
+				<p class="secondary">@club.President</p>
+			</li>
+		}
+	</ul>
 </Card>
 @if (currentClub is not null) {
 	//Render popup

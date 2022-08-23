@@ -1,0 +1,146 @@
+﻿@page "/assignments/{CourseIdx:int}"
+
+@using System.Xml.Serialization
+@using System.Xml.Linq
+
+@inject IAccountService accService
+@inject NavigationManager NavManager
+
+<div class="text-white mb-5">
+	<h3>@course.Attribute("Title").Value</h3>
+	<button class="btn btn-primary" @onclick=Reset>Reset What-Ifs</button>
+	<h3 class=@pClass>
+		@(double.IsNaN(percent) ? "N/A" : percent.ToString("F2") + " %")
+	</h3>
+</div>
+<div class="primary">
+	@{
+		if(assignments.Count == 0) {
+			<h3>No Assignments yet...</h3>
+		}
+		else for(int i = 0; i < assignments.Count; i++) {
+			int local = i;
+			var assignment = assignments[local];
+			<div class=@((assignments[local].Points == assignments[local].OriginalPointVal ? "" : "changed ") + "row gy-4 border-none rounded-md shadow-lg mb-4 p-5 relative d-flex primary")>
+				<div class="col-md-6 col-9">@assignment.Name</div>
+				<div class="col-md-2 col-3 secondary">@assignment.Type</div>
+
+				<div class="col-md-2 col-6"><input style="width: 100%;" value=@assignment.Points readonly=@(!assignment.Editable) @onchange=@(args => {assignment.Points = args.Value.ToString();CalculateCurrentPercent(); })/></div>
+				<div class="col-md-2 col-6">@assignment.Total</div>
+			</div>
+		}
+	}
+</div>
+@code {
+
+	public class Assignment {
+		public Assignment(string name, string type, string originalPointVal, string points, string total, bool editable) {
+			this.Name = name;
+			this.Type = type;
+			this.OriginalPointVal = originalPointVal;
+			this.Points = points;
+			this.Total = total;
+			this.Editable = editable;
+		}
+		public string Name { get; }
+		public string Type {get;}
+		public string OriginalPointVal { get; }
+		public string Points { get; set; }
+		public string Total { get; }
+		public bool Editable { get; }
+	}
+
+	double percent = 0;
+	string pClass = "";
+
+	[Parameter]
+	public int CourseIdx { get; set; }
+
+	XElement course;
+	XElement mark;
+	List<XElement> weights;
+	protected override void OnInitialized() {
+		if (accService.User is null || accService.Gradebook is null) {
+			NavManager.NavigateTo("");
+			return;
+		}
+		var courses = accService.Gradebook.Descendants("Course").ToList();
+		if (CourseIdx < courses.Count) {
+			course = courses[CourseIdx];
+			mark = course.Descendants("Mark").Last();
+			percent = double.Parse(mark.Attribute("CalculatedScoreRaw").Value);
+			weights = mark.Descendants("AssignmentGradeCalc").ToList();
+		}
+		else {
+			NavManager.NavigateTo("classes");
+		}
+
+		foreach (var assignment in mark.Descendants("Assignment")) {
+			bool editable = true;
+			var pointsStr = assignment.Attribute("Points").Value;
+			var split = pointsStr.Split(new char[] { ' ' }, 2);
+			string cur = "", total = "";
+			try {
+				if (split[1] == "Points Possible") {
+					cur = "?";
+					total = "/ " + split[0];
+				}
+				else {
+					cur = split[0];
+					total = split[1];
+				}
+			}
+			catch {
+				cur = pointsStr;
+				editable = false;
+			}
+
+			var assign = new Assignment(assignment.Attribute("Measure").Value, assignment.Attribute("Type").Value, cur, cur, total.Replace("/ ", ""), editable);
+			assignments.Add(assign);
+		}
+	}
+
+	List<Assignment> assignments = new List<Assignment>();
+	void CalculateCurrentPercent () {
+		Dictionary<string, double> catPoints = new();
+		Dictionary<string, double> catTotals = new();
+		foreach(var assignment in assignments) {
+			if (double.TryParse(assignment.Points, out double points) && double.TryParse(assignment.Total, out double total)) {
+				if (!catPoints.ContainsKey(assignment.Type)) {
+					catPoints.Add(assignment.Type, points);
+					catTotals.Add(assignment.Type, total);
+				}
+				else {
+					catPoints[assignment.Type] += points;
+					catTotals[assignment.Type] += total;
+				}
+			}
+		}
+		double sumOfWeights = 0;
+		double unnormalizedGrade = 0;
+		if(weights.Count == 0) {
+			percent = catPoints.Sum(kv => kv.Value) / catTotals.Sum(kv => kv.Value) * 100;	
+		}
+		else foreach(var category in weights) {
+			var weight = double.Parse(category.Attribute("Weight").Value.Trim('%'));
+			var catName = category.Attribute("Type").Value;
+			if(catPoints.ContainsKey(catName)) {
+				sumOfWeights += weight;
+				unnormalizedGrade += catPoints[catName] / catTotals[catName] * weight;
+			}
+			percent = unnormalizedGrade / sumOfWeights * 100;
+
+		}
+
+
+		pClass = "fst-italic";
+	}
+
+	void Reset() {
+		for(int i = 0; i < assignments.Count; i++) {
+			assignments[i].Points = assignments[i].OriginalPointVal;
+		}
+		pClass = "";
+	}
+
+}

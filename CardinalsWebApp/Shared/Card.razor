@@ -1,18 +1,13 @@
 ﻿@using System.Diagnostics.CodeAnalysis
 
-@if (Header is not null) {
-	<header class="card-head">
-		@Header
-	</header>
-}
+
 <div class="card-back" style="background-color: @(Color ?? "rgb(55 55 55/1)");">
-	@Content
+	@ChildContent 
 </div>
 @code {
-	[Parameter,AllowNull]
-	public RenderFragment? Header { get; set; }
+
 	[Parameter]
-	public RenderFragment? Content { get; set; }
+	public RenderFragment? ChildContent  { get; set; }
 	[Parameter,AllowNull]
 	public string? Color { get; set; }
 

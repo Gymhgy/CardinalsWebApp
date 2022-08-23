@@ -6,13 +6,18 @@
     <Login Refresh="() => StateHasChanged()"/>
 }
 else {
+    
     <button class="float-end" @onclick="() => {accService.Logout(); StateHasChanged();}">Logout</button>
+    int idx = 0;
     @foreach(var course in accService.Gradebook.Descendants("Course")) {
-        <div class="border-none rounded-md shadow-lg mb-4 p-5 relative">
-            <h2 class="primary">@course.Attribute("Period").Value &mdash; @course.Attribute("Title").Value</h2>
+        <div class="border-none rounded-md shadow-lg mb-4 p-5 relative">            
             @{var mark = course.Descendants("Mark").Last();}
 
-            <p class="secondary">@mark.Attribute("CalculatedScoreString").Value&mdash;@mark.Attribute("CalculatedScoreRaw").Value</p>
+            <h2 class="primary">@mark.Attribute("CalculatedScoreString").Value (@mark.Attribute("CalculatedScoreRaw").Value) &mdash; @course.Attribute("Title").Value</h2>
+
+            <a class="secondary d-flex text-decoration-none" href="assignments/@idx">View Grades <span class="material-symbols-outlined">arrow_forward</span></a>
+
+            @{idx++;}
         </div>
     }
 }

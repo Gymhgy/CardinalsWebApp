@@ -1,13 +1,13 @@
 ﻿@page "/"
 
-<PageTitle>Web App for the Cardinals</PageTitle>
+<PageTitle>Lowell Web App</PageTitle>
 
 <div id="container">
 	<h2 class="primary">@now.ToString("hh:mm:ss tt")</h2>
 
     <div id="date-selector">
         <button class="clear" onclick=@(() => {selected = selected.AddDays(-1);})>
-            <span class="oi oi-chevron-left primary"></span>
+            <span class="material-symbols-outlined text-white">navigate_before</span>
         </button>
         <Card>
             <Content>
@@ -15,7 +15,7 @@
             </Content>
         </Card>
         <button class="clear" onclick=@(() => {selected = selected.AddDays(1);})>
-            <span class="oi oi-chevron-right primary"></span>
+            <span class="material-symbols-outlined text-white">navigate_next</span>
         </button>
     </div>
 
