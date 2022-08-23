@@ -148,19 +148,6 @@ hr#lunch-divider[b-hwuxqdxctl] {
     border-radius: 0.5rem;
 }
 
-.card-head[b-z1l97ba4nh] {
-    --cardinal: #C41E3A;
-    background-color: var(--cardinal);
-    border: 0 solid var(--cardinal);
-    border-radius: 0.5rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    padding-top: 0.75rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    display: flex;
-    align-items: center;
-}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-3hh4ywwqho] {
     position: relative;
