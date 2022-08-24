@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "CardinalsWebApp.dll": "sha256-pD+UEi8nuYpWAvzltKbaAvu9\/uvVScDCyn8N6\/MIidI=",
+      "CardinalsWebApp.dll": "sha256-5gdfMUiLtEXCLHGBvfOCWxi42oIxx9nl0vhLFfxYy6g=",
       "Microsoft.AspNetCore.Components.dll": "sha256-GObJLtTHpW0RILPmi4JWGiMey6haTrUXc3DTLI7Pr74=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-lvK8BjUqR4beKl9SjUAY5QQ4YJmQHr06AdtE+ngBd+E=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-8hkbmtH2jLzX6TZnzSyNcKY4IqC4bt0kFsgXm7oxqRQ=",
@@ -45,7 +45,7 @@
       "System.Private.Xml.dll": "sha256-sTRpFZQ39Ai\/cHSfOEtSboj2Bt9m244\/SYxHDhK1ZiU=",
       "System.Private.Xml.Linq.dll": "sha256-DnUA0pTZNT32uwG4Jj5u+\/KDqwgufIqx2uKi6RjJ5BQ=",
       "System.Runtime.CompilerServices.Unsafe.dll": "sha256-cQEZqPkNrd7HTrrx23l85M\/huEj+FOsWEcU3UTPcjxg=",
-      "System.Runtime.dll": "sha256-1+jj\/PjnQMcug\/duCNCn+s+swvO5u7Te+Rf4v53IX0c=",
+      "System.Runtime.dll": "sha256-Zi6mbYrTXRMszyPyrwVZbNZ7\/Lcge9Y3VYohQnM5548=",
       "System.Text.Encodings.Web.dll": "sha256-YDdw97yEeGERivHPm7zTAX9p\/X\/guaJ8M7gADPmnXBw=",
       "System.Text.Json.dll": "sha256-IWkGhILmg02BXeP5sfuqO0bf6U+QloSMhz7Ygvmgcdo=",
       "System.Text.RegularExpressions.dll": "sha256-R\/B38mtR5hihVevNGGkdZdk96cNtyU441Lw4fum9Yks=",
