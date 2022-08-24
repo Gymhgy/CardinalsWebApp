@@ -32,13 +32,9 @@
 
     async Task FormSubmitted(EditContext editContext) {
         s = "Loading...";
-        try {
-            await accService.LoginAsync(user, save);
-        }
-        catch {
+        if(!(await accService.LoginAsync(user, save)))
             s = "Error logging in. Your username or password may be incorrect, or Synergy is havng problems.";
-        }
-        Refresh();
+        else Refresh();
 
     }
 

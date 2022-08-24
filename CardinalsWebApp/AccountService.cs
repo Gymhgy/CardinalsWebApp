@@ -13,8 +13,9 @@ namespace CardinalsWebApp {
     public interface IAccountService {
         User? User { get; }
         XDocument? Gradebook { get; }
-        Task LoginAsync(User user, bool store);
-        void Logout();
+        Task<bool> LoginAsync(User user, bool store);
+        Task Logout();
+
     }
     public class AccountService : IAccountService {
         public User? User { get; private set; }
@@ -29,18 +30,33 @@ namespace CardinalsWebApp {
             this.js = js;
         }
 
-        public async Task LoginAsync(User user, bool store = false) {
-            if(store) {
+        private static string err = "Source: Exception, Msg: The user name or password is incorrect.";
+        public async Task<bool> LoginAsync(User user, bool store = false) {
+            User = user;
+            try {
+                Gradebook = await SendRequestAsync(user.Username, user.Password, user.Domain, "Gradebook", "", http);
+
+            }
+            catch (ArgumentException e) {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+
+            if (store) {
                 await js.InvokeVoidAsync("window.WriteCookie", "username", user.Username, 30);
                 await js.InvokeVoidAsync("window.WriteCookie", "password", user.Password, 30);
+
             }
-            User = user;
-            Gradebook = await SendRequestAsync(user.Username, user.Password, user.Domain, "Gradebook", "", http);
+
+            return true;
         }
 
-        public void Logout() {
+        public async Task Logout() {
             User = null;
             Gradebook = null;
+            await js.InvokeVoidAsync("window.DeleteCookie", "username");
+            await js.InvokeVoidAsync("window.DeleteCookie", "password");
+
         }
         public static async Task<XDocument> SendRequestAsync(string username, string password, string domain, string method, string parms, HttpClient http) {
             using var request = new HttpRequestMessage(HttpMethod.Post, $"https://svue-proxy.herokuapp.com/svue/{domain}");
@@ -57,7 +73,9 @@ namespace CardinalsWebApp {
                 "</ns0:ProcessWebServiceRequest></soap-env:Body></soap-env:Envelope>",
                 null, "text/xml");
             var response = await (await http.SendAsync(request)).Content.ReadAsStringAsync();
-            
+
+            if (response.Contains(err)) throw new ArgumentException("username/password");
+
             var responseXml = XDocument.Parse(response);
             XNamespace xmlns = "http://edupoint.com/webservices/";
             var xml = responseXml.Descendants(xmlns + "ProcessWebServiceRequestResult").First().Value.Replace("<br>", "&#xA;");
@@ -65,6 +83,5 @@ namespace CardinalsWebApp {
             return XDocument.Parse(xml);
 
         }
-
     }
 }
