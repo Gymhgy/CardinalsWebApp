@@ -26,45 +26,45 @@
         <h3 class="primary">No School!</h3>
     }
     else {
-
-        @foreach(var periodBase in schedule.Periods) {
-            if(periodBase is Period period) {
-                <div class="border-none rounded-md shadow-lg mb-2 p-2 relative">
-                    <h2 class="primary">@period.Name</h2>
-                    <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
-                </div>
-            }
-            if(periodBase is Lunch lunch) {
-                <div class="border-none rounded-md shadow-lg mb-2 p-2 relative lunch">
-                    <div class="lunch-slot">
-                        @{period = lunch.A.First;}
-                        <div class="period">
-                            <h4 class="primary">@period.Name</h4>
-                            <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
+        <div class="container">
+            @foreach(var periodBase in schedule.Periods) {
+                if(periodBase is Period period) {
+                    <div class="border-none rounded-md shadow-lg mb-2 p-2 relative">
+                        <h2 class="primary">@period.Name</h2>
+                        <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
+                    </div>
+                }
+                if(periodBase is Lunch lunch) {
+                    <div class="border-none rounded-md shadow-lg mb-2 p-2 relative lunch">
+                        <div class="lunch-slot">
+                            @{period = lunch.A.First;}
+                            <div class="period">
+                                <h4 class="primary">@period.Name</h4>
+                                <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
+                            </div>
+                            @{period = lunch.A.Second;}
+                            <div class="period">
+                                <h4 class="primary">@period.Name</h4>
+                                <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
+                            </div>
                         </div>
-                        @{period = lunch.A.Second;}
-                        <div class="period">
-                            <h4 class="primary">@period.Name</h4>
-                            <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
+                        <hr size id="lunch-divider">
+                        <div class="lunch-slot">
+                            @{period = lunch.B.First;}
+                            <div class="period">
+                                <h4 class="primary">@period.Name</h4>
+                                <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
+                            </div>
+                            @{period = lunch.B.Second;}
+                            <div class="period">
+                                <h4 class="primary">@period.Name</h4>
+                                <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
+                            </div>
                         </div>
                     </div>
-                    <hr size id="lunch-divider">
-                    <div class="lunch-slot">
-                        @{period = lunch.B.First;}
-                        <div class="period">
-                            <h4 class="primary">@period.Name</h4>
-                            <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
-                        </div>
-                        @{period = lunch.B.Second;}
-                        <div class="period">
-                            <h4 class="primary">@period.Name</h4>
-                            <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
-                        </div>
-                    </div>
-                </div>
+                }
             }
-        }
-
+        </div>
     }
     @if (ScheduleProvider.Is2022Summer(selected)) {
         <button id="jump" class="primary" onclick=@(() => {selected = ScheduleProvider.summer2022End;})>Jump to school year</button>

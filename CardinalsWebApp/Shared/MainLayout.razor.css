@@ -8,12 +8,12 @@
 main {
     flex: 1;
     background: rgb(35,35,35);
-    background: linear-gradient(0deg, rgba(35,35,35,1) 20%, rgba(196,30,58,1) 90%);
+    background: linear-gradient(11deg, rgba(35,35,35,1) 20%, hsl(347deg 63% 45%) 90%);
     background-attachment: fixed;
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-image: linear-gradient(194deg, rgb(55 55 55) 0%, #000000 70%);
 }
 
 .top-row {

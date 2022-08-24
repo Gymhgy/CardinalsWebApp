@@ -37,25 +37,23 @@
 	<div class="darken" onclick=@(() => {currentClub = null; StateHasChanged();})></div>
 	<div id="popup-container">
 		<Card>
-			<Content>
-				<div class="">
-					<h2 class="primary">@currentClub.Name</h2>
-					<section id="club-info" class="primary">
-						<div>
-							<b class="secondary">Day(s):</b> <p>@currentClub.MeetingDays</p>
-							<b class="secondary">President(s):</b> <p>@currentClub.President</p>
-							<b class="secondary">VP(s):</b> <p>@currentClub.VicePresident</p>
-						</div>
-						<div class="text-right">
-							<b class="secondary">Club email:</b> <p>@currentClub.ClubEmail</p>
-							<b class="secondary">Sponsor:</b> <p>@currentClub.ClubSponsor</p>
-							<b class="secondary">Sponsor email:</b> <p>@currentClub.SponsorEmail</p>
-						</div>
-					</section>
-					<hr>
-					<p class="primary">@currentClub.Description</p>
-				</div>
-			</Content>
+			<div class="p-3" style="max-width: 28rem; max-height: 90%;">
+				<h2 class="primary">@currentClub.Name</h2>
+				<section id="club-info" class="primary">
+					<div>
+						<b class="secondary">Day(s):</b> <p>@currentClub.MeetingDays</p>
+						<b class="secondary">President(s):</b> <p>@currentClub.President</p>
+						<b class="secondary">VP(s):</b> <p>@currentClub.VicePresident</p>
+					</div>
+					<div>
+						<b class="secondary text-break">Club email:</b> <p>@currentClub.ClubEmail</p>
+						<b class="secondary">Sponsor:</b> <p>@currentClub.ClubSponsor</p>
+						<b class="secondary text-break">Sponsor email:</b> <p>@currentClub.SponsorEmail</p>
+					</div>
+				</section>
+				<hr>
+				<p class="primary">@currentClub.Description</p>
+			</div>
 		</Card>
 	</div>
 }
