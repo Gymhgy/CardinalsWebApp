@@ -25,10 +25,16 @@
         if (accService.Gradebook == null) {
             string username = await js.InvokeAsync<string>("window.ReadCookie", "username");
             string password = await js.InvokeAsync<string>("window.ReadCookie", "password");
+            string schedule = await js.InvokeAsync<string>("window.ReadCookie", "schedule");
+
+
             Console.WriteLine(username + " " + password);
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) return;
 
-            await accService.LoginAsync(new User { Username = username, Password = password }, false);
+            if(await accService.LoginAsync(new User { Username = username, Password = password }, false)) {
+                accService.InitSchedule(schedule);
+            }
+
         }
     }
 }

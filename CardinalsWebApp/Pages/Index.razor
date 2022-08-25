@@ -1,5 +1,7 @@
 ﻿@page "/"
 
+@inject IAccountService accService
+
 <PageTitle>Lowell Web App</PageTitle>
 
 <div id="container">
@@ -10,9 +12,7 @@
             <span class="material-symbols-outlined text-white">navigate_before</span>
         </button>
         <Card>
-            <Content>
-                <p class="primary" id="date-shower">@selected</p>
-            </Content>
+            <p class="primary" id="date-shower">@selected</p>
         </Card>
         <button class="clear" onclick=@(() => {selected = selected.AddDays(1);})>
             <span class="material-symbols-outlined text-white">navigate_next</span>
@@ -31,6 +31,7 @@
                 if(periodBase is Period period) {
                     <div class="border-none rounded-md shadow-lg mb-2 p-2 relative">
                         <h2 class="primary">@period.Name</h2>
+                        <p class="secondary">@accService.GetName(@period.Name)</p>
                         <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
                     </div>
                 }
@@ -40,11 +41,13 @@
                             @{period = lunch.A.First;}
                             <div class="period">
                                 <h4 class="primary">@period.Name</h4>
+                                <p class="secondary">@accService.GetName(@period.Name)</p>
                                 <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
                             </div>
                             @{period = lunch.A.Second;}
                             <div class="period">
                                 <h4 class="primary">@period.Name</h4>
+                                <p class="secondary">@accService.GetName(@period.Name)</p>
                                 <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
                             </div>
                         </div>
@@ -53,11 +56,13 @@
                             @{period = lunch.B.First;}
                             <div class="period">
                                 <h4 class="primary">@period.Name</h4>
+                                <p class="secondary">@accService.GetName(@period.Name)</p>
                                 <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
                             </div>
                             @{period = lunch.B.Second;}
                             <div class="period">
                                 <h4 class="primary">@period.Name</h4>
+                                <p class="secondary">@accService.GetName(@period.Name)</p>
                                 <p class="secondary">@period.StartTime&ndash;@period.EndTime</p>
                             </div>
                         </div>

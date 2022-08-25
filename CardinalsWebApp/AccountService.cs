@@ -13,14 +13,18 @@ namespace CardinalsWebApp {
     public interface IAccountService {
         User? User { get; }
         XDocument? Gradebook { get; }
+        Dictionary<string, string> ClassNames { get; }
         Task<bool> LoginAsync(User user, bool store);
+        void InitSchedule(string schedule);
         Task Logout();
 
+        string GetName(string period);
     }
     public class AccountService : IAccountService {
         public User? User { get; private set; }
 
         public XDocument? Gradebook { get; private set; }
+        public Dictionary<string, string> ClassNames { get; private set; } = new Dictionary<string, string>();
 
         private readonly HttpClient http;
         private readonly IJSRuntime js;
@@ -36,16 +40,22 @@ namespace CardinalsWebApp {
             try {
                 Gradebook = await SendRequestAsync(user.Username, user.Password, user.Domain, "Gradebook", "", http);
 
+                ClassNames = Gradebook.Descendants("Course").ToDictionary(x => x.Attribute("Period").Value, x => x.Attribute("Title").Value);
             }
             catch (ArgumentException e) {
                 Console.WriteLine(e.Message);
                 return false;
-            }
+			}
 
             if (store) {
+                Console.WriteLine(user.Username + " " + user.Password);
                 await js.InvokeVoidAsync("window.WriteCookie", "username", user.Username, 30);
                 await js.InvokeVoidAsync("window.WriteCookie", "password", user.Password, 30);
-
+                string s = string.Join(";",
+                    Gradebook.Descendants("Course").Select(x => x.Attribute("Period").Value + "=" + x.Attribute("Title").Value));
+                Console.WriteLine(s);
+                await js.InvokeVoidAsync("window.WriteCookie", "schedule", string.Join(";",
+                    Gradebook.Descendants("Course").Select(x => x.Attribute("Period").Value + "=" + x.Attribute("Title").Value)), 30);
             }
 
             return true;
@@ -54,8 +64,10 @@ namespace CardinalsWebApp {
         public async Task Logout() {
             User = null;
             Gradebook = null;
+            ClassNames.Clear();
             await js.InvokeVoidAsync("window.DeleteCookie", "username");
             await js.InvokeVoidAsync("window.DeleteCookie", "password");
+            await js.InvokeVoidAsync("window.DeleteCookie", "schedule");
 
         }
         public static async Task<XDocument> SendRequestAsync(string username, string password, string domain, string method, string parms, HttpClient http) {
@@ -83,5 +95,19 @@ namespace CardinalsWebApp {
             return XDocument.Parse(xml);
 
         }
-    }
+
+		public void InitSchedule(string schedule) {
+            try {
+                ClassNames = schedule.Split(";").ToDictionary(item => item.Split("=")[0], item => item.Split("=")[1]);
+            }
+            catch { }
+		}
+
+        public string GetName(string period) {
+            if (ClassNames.TryGetValue(period, out string name)) {
+                return name;
+            }
+            else return "";
+		}
+	}
 }
