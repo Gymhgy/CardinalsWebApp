@@ -4,6 +4,14 @@
 
 <PageTitle>Lowell Web App</PageTitle>
 
+@if(accService.ClassNames == null || accService.ClassNames.Count == 0) {
+    <div class="alert alert-primary alert-dismissible fade show">
+        You should login via the <a href="classes">Classes page</a>, so you can see your classes & personal schedule!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+    </div>
+}
+
 <div id="container">
 	<h2 class="primary">@now.ToString("hh:mm:ss tt")</h2>
 
@@ -37,7 +45,7 @@
                 }
                 if(periodBase is Lunch lunch) {
                     <div class="border-none rounded-md shadow-lg mb-2 p-2 relative lunch">
-                        <div class="lunch-slot">
+                        <div class="lunch-slot w-50">
                             @{period = lunch.A.First;}
                             <div class="period">
                                 <h4 class="primary">@period.Name</h4>
@@ -52,7 +60,7 @@
                             </div>
                         </div>
                         <hr size id="lunch-divider">
-                        <div class="lunch-slot">
+                        <div class="lunch-slot w-50">
                             @{period = lunch.B.First;}
                             <div class="period">
                                 <h4 class="primary">@period.Name</h4>

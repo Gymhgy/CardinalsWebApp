@@ -28,11 +28,13 @@
             string schedule = await js.InvokeAsync<string>("window.ReadCookie", "schedule");
 
 
+            try { accService.InitSchedule(schedule); } catch { }
+
+
             Console.WriteLine(username + " " + password);
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) return;
 
             if(await accService.LoginAsync(new User { Username = username, Password = password }, false)) {
-                accService.InitSchedule(schedule);
             }
 
         }
