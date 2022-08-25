@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "CardinalsWebApp.dll": "sha256-5gdfMUiLtEXCLHGBvfOCWxi42oIxx9nl0vhLFfxYy6g=",
+      "CardinalsWebApp.dll": "sha256-v+EqRSyPoMyoJKh6B5KuG1Fb9mHXhjZmBEZODxBvljk=",
       "Microsoft.AspNetCore.Components.dll": "sha256-GObJLtTHpW0RILPmi4JWGiMey6haTrUXc3DTLI7Pr74=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-lvK8BjUqR4beKl9SjUAY5QQ4YJmQHr06AdtE+ngBd+E=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-8hkbmtH2jLzX6TZnzSyNcKY4IqC4bt0kFsgXm7oxqRQ=",
@@ -33,7 +33,7 @@
       "System.ComponentModel.TypeConverter.dll": "sha256-Tc7as+TXsvZKvsjbcbSWIIkhreucVBDuzxZgaBKygC8=",
       "System.Console.dll": "sha256-gDD65SM8HD031pHwr10oyHdfR8UPdlf1x9e5amKtT3c=",
       "System.dll": "sha256-PdeKH2Cv9Zv944vnu2iECqm1vnAbquqZ3k63QD6qB6g=",
-      "System.Linq.dll": "sha256-Qid7YyDNXvXpK5H6IKnH64IcK4l2Miow3J9dV+srueA=",
+      "System.Linq.dll": "sha256-GIPhuTHURa4JeNYjsz3MPcNfz0cLc+LOZRFHU1ya5PA=",
       "System.Linq.Expressions.dll": "sha256-bHOfxzAZ5QWkKBH5uUYp7kCEkXzZvmpPQtl+G+POTG8=",
       "System.Memory.dll": "sha256-UokuFozSuCoaLbJ3EkT84XsrUyATeQOWd7PPF6xKE2M=",
       "System.Net.Http.dll": "sha256-ba3qi7kl6TzXpoiU7slGh5eW4m3DNLzyzNUVCWQjoGY=",
